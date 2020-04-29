@@ -16,8 +16,6 @@ const TodoList = (props) => {
         props.filterBy(color)
     }
 
-
-
     let Items = []
 
     if (props.data == '') {
@@ -76,10 +74,10 @@ const TodoList = (props) => {
                             'Are you sure you wan to clear all your memos?',
                             null,
                             [
-                                {text: 'Yes, i\'m sure', onPress: () => purgeStore()},
-                                {text: 'No, keep them', onPress: () => {}},
+                                { text: 'Yes, i\'m sure', onPress: () => purgeStore() },
+                                { text: 'No, keep them', onPress: () => { } },
                             ],
-                            {cancelable: false}
+                            { cancelable: false }
                         )
                     }} >
                     <Text style={styles.clearBtnText} >Clear the storage</Text>

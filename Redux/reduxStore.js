@@ -1,7 +1,7 @@
-import {createStore, combineReducers} from 'redux'
-import {todoListReducer} from '../Reducers/todoListReducer'
-import {addTodoReducer} from '../Reducers/addTodoReducer'
-import {persistStore, persistReducer} from 'redux-persist'
+import { createStore, combineReducers } from 'redux'
+import { todoListReducer } from '../Reducers/todoListReducer'
+import { addTodoReducer } from '../Reducers/addTodoReducer'
+import { persistStore, persistReducer } from 'redux-persist'
 import AsyncStorage from '@react-native-community/async-storage'
 
 const rootReducer = combineReducers({

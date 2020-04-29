@@ -12,10 +12,10 @@ const Header = (props) => {
                         'How you want to sort your memos?',
                         null,
                         [
-                            {text: 'From low to high', onPress: () => props.sortByDate(false)},
-                            {text: 'From high to low', onPress: () => props.sortByDate(true)},
+                            { text: 'From low to high', onPress: () => props.sortByDate(false) },
+                            { text: 'From high to low', onPress: () => props.sortByDate(true) },
                         ],
-                        {cancelable: false}
+                        { cancelable: false }
                     )
                 }} >
                 <Text style={styles.btn} >Sort</Text>

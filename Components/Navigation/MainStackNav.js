@@ -1,14 +1,13 @@
 import React from 'react'
-import {createStackNavigator} from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack'
 import TodoListNav from './TodoList/TodoListNav'
 import AddItemNav from './AddItem/AddItemNav'
-import Update from './Update/Update'
 import UpdateNav from './Update/UpdateNav'
 
 const RootMainStack = createStackNavigator()
 
 const MainStackNav = () => {
-    return(
+    return (
         <RootMainStack.Navigator>
             <RootMainStack.Screen
                 name='ToDo'

@@ -1,4 +1,4 @@
-import {PURGE} from 'redux-persist'
+import { PURGE } from 'redux-persist'
 
 const ADD_TODO = 'ADD_TODO',
     DELETE_TODO = 'DELETE_TODO',
@@ -6,7 +6,7 @@ const ADD_TODO = 'ADD_TODO',
     TOGGLE_FILTER = 'TOGGLE_FILTER',
     SORT_BY_DATE = 'SORT_BY_DATE',
     UPDATE_MEMO = 'UPDATE_MEMO'
-    
+
 
 let initialState = {
     todosData: [],
@@ -14,6 +14,7 @@ let initialState = {
     showFilter: false,
     sorted: false
 }
+
 export const todoListReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_TODO:

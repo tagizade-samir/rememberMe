@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Update from './Update'
 
-const UpdateNav = ({navigation, route}) => {
+const UpdateNav = ({ navigation, route }) => {
     const goTo = () => {
         navigation.navigate('ToDo')
     }

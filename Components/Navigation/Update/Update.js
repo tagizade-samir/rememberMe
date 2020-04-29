@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Text, SafeAreaView, View, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { Text, SafeAreaView, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import { addStyles as styles } from '../../Style'
 import { connect } from 'react-redux'
-import { addTodo, checkBox, updateMemo } from '../../../Actions/actions'
-import Checkbox from '../AddItem/Checkbox/Checkbox'
+import { updateMemo } from '../../../Actions/actions'
 
 const Update = (props) => {
     const ItemData = props.todoData ? props.todoData.filter(elem => elem.id === props.itemId) : null
