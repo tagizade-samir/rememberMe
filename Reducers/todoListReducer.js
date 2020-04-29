@@ -1,7 +1,9 @@
 const ADD_TODO = 'ADD_TODO',
     DELETE_TODO = 'DELETE_TODO',
     FILTER_BY = 'FILTER_BY',
-    TOGGLE_FILTER = 'TOGGLE_FILTER'
+    TOGGLE_FILTER = 'TOGGLE_FILTER',
+    SORT_BY_DATE = 'SORT_BY_DATE',
+    UPDATE_MEMO = 'UPDATE_MEMO'
 
 let initialState = {
     todosData: [
@@ -16,7 +18,7 @@ let initialState = {
             id: 2,
             title: 'Some title 2',
             text: 'Some text 2',
-            bgColor: 'white',
+            bgColor: 'goldenrod',
             date: '27.04.2020'
         },
         {
@@ -28,7 +30,8 @@ let initialState = {
         },
     ],
     filter: 'none',
-    showFilter: false
+    showFilter: false,
+    sorted: false
 }
 export const todoListReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -59,6 +62,26 @@ export const todoListReducer = (state = initialState, action) => {
             return {
                 ...state,
                 showFilter: state.showFilter ? false : true
+            }
+        case SORT_BY_DATE:
+            return {
+                ...state,
+                sorted: action.sort
+            }
+        case UPDATE_MEMO:
+            return {
+                ...state,
+                todosData: state.todosData.map(item => {
+                    if (item.id === action.id) {
+                        return {
+                            ...item,
+                            title: action.title,
+                            text: action.text
+                        }
+                    }
+
+                    return item
+                })
             }
         default:
             return state

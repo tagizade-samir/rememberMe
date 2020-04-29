@@ -9,6 +9,12 @@ const TodoItem = (props) => {
                 <Text style={styles.title} >
                     {props.title}
                 </Text>
+                <View style={styles.btnContainer} >
+                <TouchableOpacity
+                    style={styles.deleteBtnContainer}
+                    onPress={() => props.goToUpdate(props.id)} >
+                    <Text style={styles.deleteBtnText} >Update</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.deleteBtnContainer}
                     onPress={() =>
@@ -23,6 +29,7 @@ const TodoItem = (props) => {
                              )} >
                     <Text style={styles.deleteBtnText} >Delete</Text>
                 </TouchableOpacity>
+                </View>
             </View>
             <View style={styles.textContainer} >
                 <Text style={styles.text} >

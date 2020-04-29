@@ -6,7 +6,18 @@ const Header = (props) => {
     return (
         <View style={styles.container} >
             <TouchableOpacity
-                style={styles.btnContainer} >
+                style={styles.btnContainer}
+                onPress={() => {
+                    Alert.alert(
+                        'How you want to sort your memos?',
+                        null,
+                        [
+                            {text: 'From low to high', onPress: () => props.sortByDate(false)},
+                            {text: 'From high to low', onPress: () => props.sortByDate(true)},
+                        ],
+                        {cancelable: false}
+                    )
+                }} >
                 <Text style={styles.btn} >Sort</Text>
             </TouchableOpacity>
             <Text style={styles.headTitle} >

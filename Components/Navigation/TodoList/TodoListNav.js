@@ -6,8 +6,12 @@ const TodoListNav = ({navigation}) => {
         navigation.navigate('Add')
     }
 
+    const goToUpdate = (id) => {
+        navigation.navigate('Update', {id: id})
+    }
+
     return(
-        <TodoList goTo={goToAdd} />
+        <TodoList goTo={goToAdd} goToUpdate={goToUpdate} />
     )
 }
 

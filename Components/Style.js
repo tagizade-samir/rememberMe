@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const windowH = Dimensions.get('window').height
 
 export const todoItem = StyleSheet.create({
     container: {
@@ -34,10 +36,14 @@ export const todoItem = StyleSheet.create({
     deleteBtnContainer: {
         backgroundColor: 'steelblue',
         paddingVertical: 5,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        marginLeft: 10
     },
     deleteBtnText: {
         textTransform: 'uppercase',
+    },
+    btnContainer: {
+        flexDirection: 'row',
     }
 })
 
@@ -85,6 +91,12 @@ export const todoListStyles = StyleSheet.create({
     },
     btnText: {
         fontSize: 50
+    },
+    defaultText: {
+        fontSize: 30,
+        color: 'gray',
+        textAlign: 'center',
+        marginTop: windowH / 4
     }
 })
 
