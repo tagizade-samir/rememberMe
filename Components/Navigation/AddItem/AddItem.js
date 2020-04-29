@@ -1,34 +1,50 @@
 import React, { useState } from 'react'
-import { Text, SafeAreaView, View, TextInput, TouchableOpacity } from 'react-native'
+import { Text, SafeAreaView, View, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { addStyles as styles } from '../../Style'
 import { connect } from 'react-redux'
-import { addTodo } from '../../../Actions/actions'
-import { ScrollView } from 'react-native-gesture-handler'
+import { addTodo, checkBox } from '../../../Actions/actions'
+import Checkbox from './Checkbox/Checkbox'
 
 const AddItem = (props) => {
     const [titleText, titleChange] = useState(null)
     const [textText, textChange] = useState(null)
 
     const addMemo = () => {
-        const date = new Date()
-        date.setHours(date.getHours() + 4)
-
         if (titleText && textText) {
-            props.addTodo(titleText, textText, getTodoDate(date))
+            const date = new Date()
+            date.setHours(date.getHours() + 4)
+            let box = props.checks.filter(elem => elem.checked)
+
+            props.addTodo(titleText, textText, getTodoDate(date), box[0].value)
             props.goTo()
         }
     }
 
+    const checkBox = (id) => {
+        props.checkBox(id)
+    }
+
+    const checks = props.checks.map(
+        elem =>
+            <Checkbox
+                key={elem.id}
+                id={elem.id}
+                value={elem.value}
+                title={elem.title}
+                checked={elem.checked}
+                checkBox={checkBox} />
+    )
+
     return (
         <SafeAreaView style={styles.container} >
-            <ScrollView>
+            <ScrollView >
                 <View style={styles.form} >
                     <View style={styles.formContainer} >
                         <Text style={styles.titleLabel} >Title</Text>
                         <TextInput
                             style={styles.titleInput}
                             placeholder='Enter your title'
-                            maxLength={45}
+                            maxLength={35}
                             value={titleText}
                             onChangeText={(text) => titleChange(text)} />
                     </View>
@@ -43,6 +59,9 @@ const AddItem = (props) => {
                             value={textText}
                             onChangeText={(text) => textChange(text)} />
                     </View>
+                    <View style={styles.checksContainer} >
+                        {checks}
+                    </View>
                     <TouchableOpacity
                         style={styles.btnContainer} >
                         <Text style={styles.btnText}
@@ -56,9 +75,18 @@ const AddItem = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTodo(title, text, date) {
-            dispatch(addTodo(title, text, date))
+        addTodo(title, text, date, color) {
+            dispatch(addTodo(title, text, date, color))
+        },
+        checkBox(id) {
+            dispatch(checkBox(id))
         }
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        checks: state.addTodo.checkData
     }
 }
 
@@ -71,4 +99,4 @@ const getTodoDate = (date) => {
     return `${hours}:${minutes}  ${day}.${month}.${year}`
 }
 
-export default connect(null, mapDispatchToProps)(AddItem)
+export default connect(mapStateToProps, mapDispatchToProps)(AddItem)

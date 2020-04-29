@@ -1,6 +1,6 @@
 import React from 'react'
 import {todoItem as styles} from '../../../Style'
-import { Text, View } from 'react-native'
+import { Text, View, TouchableOpacity, Alert } from 'react-native'
 
 const TodoItem = (props) => {
     return(
@@ -9,6 +9,20 @@ const TodoItem = (props) => {
                 <Text style={styles.title} >
                     {props.title}
                 </Text>
+                <TouchableOpacity
+                    style={styles.deleteBtnContainer}
+                    onPress={() =>
+                         Alert.alert(
+                             'Are you sure you want to delete this memo?',
+                             null,
+                             [
+                                 {text: 'Yes', onPress: () => props.deleteTodo(props.id)},
+                                 {text: 'No', onPress: () => {}}
+                                ],
+                             {cancelable: false}
+                             )} >
+                    <Text style={styles.deleteBtnText} >Delete</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.textContainer} >
                 <Text style={styles.text} >
