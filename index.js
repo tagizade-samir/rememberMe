@@ -1,14 +1,19 @@
 import React from 'react'
-import {AppRegistry} from 'react-native';
+import { AppRegistry } from 'react-native';
 import App from './Components/App/App';
-import {name as appName} from './app.json';
+import { name as appName } from './app.json';
 import { Provider } from 'react-redux';
-import { store } from './Redux/reduxStore';
+import { store, persistor } from './Redux/reduxStore';
+import { PersistGate } from 'redux-persist/integration/react'
 
 const MyApp = () => {
-    return(
+    return (
         <Provider store={store} >
-            <App />
+            <PersistGate
+                loading={null}
+                persistor={persistor} >
+                <App />
+            </PersistGate>
         </Provider>
     )
 }

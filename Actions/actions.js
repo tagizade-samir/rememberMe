@@ -1,3 +1,5 @@
+import { PURGE } from 'redux-persist'
+
 const ADD_TODO = 'ADD_TODO',
     CHECK_BOX = 'CHECK_BOX',
     DELETE_TODO = 'DELETE_TODO',
@@ -5,6 +7,14 @@ const ADD_TODO = 'ADD_TODO',
     TOGGLE_FILTER = 'TOGGLE_FILTER',
     SORT_BY_DATE = 'SORT_BY_DATE',
     UPDATE_MEMO = 'UPDATE_MEMO'
+
+export const purgeStore = () => {
+    return {
+        type: PURGE,
+        key: 'root',
+        result: () => null
+    }
+}
 
 export const addTodo = (title, text, date, color) => {
     return {

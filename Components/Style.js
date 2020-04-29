@@ -19,7 +19,8 @@ export const todoItem = StyleSheet.create({
     title: {
         fontSize: 25,
         fontWeight: 'bold',
-        letterSpacing: 1
+        letterSpacing: 1,
+        width: 200
     },
     textContainer: {
         marginBottom: 10,
@@ -97,6 +98,17 @@ export const todoListStyles = StyleSheet.create({
         color: 'gray',
         textAlign: 'center',
         marginTop: windowH / 4
+    },
+    clearBtnContainer: {
+        backgroundColor: 'steelblue',
+        marginBottom: 10,
+        padding: 10
+    },
+    clearBtnText: {
+        fontSize: 16,
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        fontWeight: 'bold'
     }
 })
 

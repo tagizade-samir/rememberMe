@@ -1,10 +1,10 @@
 import React from 'react'
-import { Text, SafeAreaView, View, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, SafeAreaView, View, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import Header from './Header/Header'
 import { todoListStyles as styles } from '../../Style'
 import { connect } from 'react-redux'
 import TodoItem from './todoItem/TodoItem'
-import { deleteTodo, filterBy, toggleFilter, sortByDate } from '../../../Actions/actions'
+import { deleteTodo, filterBy, toggleFilter, sortByDate, purgeStore } from '../../../Actions/actions'
 import Filter from './Filter/Filter'
 
 const TodoList = (props) => {
@@ -15,6 +15,8 @@ const TodoList = (props) => {
     const filterBtn = (color) => {
         props.filterBy(color)
     }
+
+
 
     let Items = []
 
@@ -56,6 +58,10 @@ const TodoList = (props) => {
         props.toggleFilter()
     }
 
+    const purgeStore = () => {
+        props.purge()
+    }
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <Header
@@ -63,6 +69,21 @@ const TodoList = (props) => {
                 sortByDate={props.sortByDate} />
             {props.showFilter && <Filter filter={props.filter} filterBtn={filterBtn} />}
             <ScrollView style={styles.scrollContainer} >
+                <TouchableOpacity
+                    style={styles.clearBtnContainer}
+                    onPress={() => {
+                        Alert.alert(
+                            'Are you sure you wan to clear all your memos?',
+                            null,
+                            [
+                                {text: 'Yes, i\'m sure', onPress: () => purgeStore()},
+                                {text: 'No, keep them', onPress: () => {}},
+                            ],
+                            {cancelable: false}
+                        )
+                    }} >
+                    <Text style={styles.clearBtnText} >Clear the storage</Text>
+                </TouchableOpacity>
                 {props.sorted ? Items.reverse() : Items}
             </ScrollView>
             <TouchableOpacity
@@ -96,6 +117,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         sortByDate(sort) {
             dispatch(sortByDate(sort))
+        },
+        purge() {
+            dispatch(purgeStore())
         }
     }
 }

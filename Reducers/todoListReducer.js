@@ -1,34 +1,15 @@
+import {PURGE} from 'redux-persist'
+
 const ADD_TODO = 'ADD_TODO',
     DELETE_TODO = 'DELETE_TODO',
     FILTER_BY = 'FILTER_BY',
     TOGGLE_FILTER = 'TOGGLE_FILTER',
     SORT_BY_DATE = 'SORT_BY_DATE',
     UPDATE_MEMO = 'UPDATE_MEMO'
+    
 
 let initialState = {
-    todosData: [
-        {
-            id: 1,
-            title: 'Some title',
-            text: 'Some text',
-            bgColor: 'darkgreen',
-            date: '26.04.2020'
-        },
-        {
-            id: 2,
-            title: 'Some title 2',
-            text: 'Some text 2',
-            bgColor: 'goldenrod',
-            date: '27.04.2020'
-        },
-        {
-            id: 3,
-            title: 'Some title 3',
-            text: 'Some text 3',
-            bgColor: 'goldenrod',
-            date: '28.04.2020'
-        },
-    ],
+    todosData: [],
     filter: 'none',
     showFilter: false,
     sorted: false
@@ -82,6 +63,11 @@ export const todoListReducer = (state = initialState, action) => {
 
                     return item
                 })
+            }
+        case PURGE:
+            return {
+                ...state,
+                todosData: []
             }
         default:
             return state
