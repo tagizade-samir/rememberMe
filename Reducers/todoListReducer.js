@@ -1,12 +1,5 @@
+import { Constans } from '../Components/App/constans/constans'
 import { PURGE } from 'redux-persist'
-
-const ADD_TODO = 'ADD_TODO',
-    DELETE_TODO = 'DELETE_TODO',
-    FILTER_BY = 'FILTER_BY',
-    TOGGLE_FILTER = 'TOGGLE_FILTER',
-    SORT_BY_DATE = 'SORT_BY_DATE',
-    UPDATE_MEMO = 'UPDATE_MEMO'
-
 
 let initialState = {
     todosData: [],
@@ -17,7 +10,7 @@ let initialState = {
 
 export const todoListReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_TODO:
+        case Constans.ADD_TODO:
             let newMemo = {
                 id: state.todosData.length + 1,
                 title: action.title,
@@ -30,27 +23,27 @@ export const todoListReducer = (state = initialState, action) => {
                 ...state,
                 todosData: [...state.todosData, newMemo]
             }
-        case DELETE_TODO:
+        case Constans.DELETE_TODO:
             return {
                 ...state,
                 todosData: state.todosData.filter(elem => elem.id !== action.id)
             }
-        case FILTER_BY:
+        case Constans.FILTER_BY:
             return {
                 ...state,
                 filter: action.color
             }
-        case TOGGLE_FILTER:
+        case Constans.TOGGLE_FILTER:
             return {
                 ...state,
                 showFilter: state.showFilter ? false : true
             }
-        case SORT_BY_DATE:
+        case Constans.SORT_BY_DATE:
             return {
                 ...state,
                 sorted: action.sort
             }
-        case UPDATE_MEMO:
+        case Constans.UPDATE_MEMO:
             return {
                 ...state,
                 todosData: state.todosData.map(item => {

@@ -1,4 +1,4 @@
-const CHECK_BOX = 'CHECK_BOX'
+import { Constans } from "../Components/App/constans/constans"
 
 let initialState = {
     checkData: [
@@ -11,7 +11,7 @@ let initialState = {
 
 export const addTodoReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CHECK_BOX:
+        case Constans.CHECK_BOX:
             return {
                 ...state,
                 checkData: state.checkData.map(elem => {

@@ -1,9 +1,10 @@
 import React from 'react'
 import AddItem from './AddItem'
+import { Constans } from '../../App/constans/constans'
 
 const AddItemNav = ({navigation}) => {
     const goToList = () => {
-        navigation.navigate('ToDo')
+        navigation.navigate(Constans.TODO_SCREEN)
     }
 
     return(

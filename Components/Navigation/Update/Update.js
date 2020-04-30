@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
-import { Text, SafeAreaView, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { SafeAreaView, View, ScrollView } from 'react-native'
 import { addStyles as styles } from '../../Style'
 import { connect } from 'react-redux'
 import { updateMemo } from '../../../Actions/actions'
+import TitleINputForm from '../AddItem/TitleInputForm/TitleInputForm'
+import TextInputFrom from '../AddItem/TextInputForm/TextInputForm'
+import AddMemoButton from '../AddItem/AddMemoButton/AddMemoButton'
+import {Constans} from '../../App/constans/constans'
 
 const Update = (props) => {
     const ItemData = props.todoData ? props.todoData.filter(elem => elem.id === props.itemId) : null
@@ -22,31 +26,15 @@ const Update = (props) => {
         <SafeAreaView style={styles.container} >
             <ScrollView >
                 <View style={styles.form} >
-                    <View style={styles.formContainer} >
-                        <Text style={styles.titleLabel} >Title</Text>
-                        <TextInput
-                            style={styles.titleInput}
-                            placeholder='Enter your title'
-                            maxLength={35}
-                            value={titleText}
-                            onChangeText={(text) => titleChange(text)} />
-                    </View>
-                    <View style={styles.formContainer} >
-                        <Text style={styles.textLabel} >Text</Text>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Enter your text'
-                            multiline={true}
-                            numberOfLines={8}
-                            maxLength={300}
-                            value={textText}
-                            onChangeText={(text) => textChange(text)} />
-                    </View>
-                    <TouchableOpacity
-                        style={styles.btnContainer} >
-                        <Text style={styles.btnText}
-                            onPress={updateMemo} >Update memo</Text>
-                    </TouchableOpacity>
+                    <TitleINputForm
+                        titleText={titleText}
+                        titleChange={titleChange} />
+                    <TextInputFrom 
+                        textText={textText}
+                        textChange={textChange} />
+                    <AddMemoButton 
+                        btnMethod={updateMemo}
+                        btnName={Constans.UPDATE_MEMO_BTN_NAME} />
                 </View>
             </ScrollView>
         </SafeAreaView>

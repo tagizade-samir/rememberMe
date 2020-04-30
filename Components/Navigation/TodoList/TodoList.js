@@ -1,11 +1,14 @@
 import React from 'react'
-import { Text, SafeAreaView, View, ScrollView, TouchableOpacity, Alert } from 'react-native'
+import { Text, SafeAreaView, ScrollView } from 'react-native'
 import Header from './Header/Header'
 import { todoListStyles as styles } from '../../Style'
 import { connect } from 'react-redux'
 import TodoItem from './todoItem/TodoItem'
 import { deleteTodo, filterBy, toggleFilter, sortByDate, purgeStore } from '../../../Actions/actions'
 import Filter from './Filter/Filter'
+import AddButton from './AddButton/AddButton'
+import ClearButton from './ClearButton/ClearButton'
+import {persistor} from '../../../Redux/reduxStore'
 
 const TodoList = (props) => {
     const deleteTodo = (id) => {
@@ -20,7 +23,7 @@ const TodoList = (props) => {
     }
 
     let Items = []
-
+//BUDET VREMYA, SDELAY CHTO TO S ETIMI IF ELSE, SDELAY KOD POMENWE I 4ITABELNEY. OK? Ponyal, spasibo)sdelayu) udachi)Spasibo)
     if (props.data == '') {
         Items =
             <Text style={styles.defaultText} >
@@ -41,7 +44,7 @@ const TodoList = (props) => {
                         goToUpdate={props.goToUpdate} />
             )
 
-            // props.sorted ? Items.reverse() : Items
+            props.sorted ? Items.reverse() : Items
         } else {
             Items = props.data.filter(elem => elem.bgColor === props.filter).map(
                 item =>
@@ -52,18 +55,16 @@ const TodoList = (props) => {
                         bgColor={item.bgColor}
                         date={item.date}
                         deleteTodo={deleteTodo}
-                        id={item.id} />
+                        id={item.id}
+                        goToUpdate={props.goToUpdate} />
             )
 
-            // props.sorted ? Items.reverse() : Items
+            props.sorted ? Items.reverse() : Items
         }
     }
 
-    const toggleFilter = () => {
-        props.toggleFilter()
-    }
-
     const purgeStore = () => {
+        persistor.purge()
         props.sortByDate(false)
         props.purge()
     }
@@ -71,32 +72,14 @@ const TodoList = (props) => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <Header
-                toggleFilter={toggleFilter}
+                toggleFilter={props.toggleFilter}
                 sortByDate={props.sortByDate} />
             {props.showFilter && <Filter filter={props.filter} filterBtn={filterBtn} />}
             <ScrollView style={styles.scrollContainer} >
-                <TouchableOpacity
-                    style={styles.clearBtnContainer}
-                    onPress={() => {
-                        Alert.alert(
-                            'Are you sure you wan to clear all your memos?',
-                            null,
-                            [
-                                { text: 'Yes, i\'m sure', onPress: () => purgeStore() },
-                                { text: 'No, keep them', onPress: () => { } },
-                            ],
-                            { cancelable: false }
-                        )
-                    }} >
-                    <Text style={styles.clearBtnText} >Clear the storage</Text>
-                </TouchableOpacity>
-                {props.sorted ? Items.reverse() : Items}
+               <ClearButton purgeStore={purgeStore} />
+                {Items}
             </ScrollView>
-            <TouchableOpacity
-                onPress={props.goTo}
-                style={styles.btnContainer} >
-                <Text style={styles.btnText} >+</Text>
-            </TouchableOpacity>
+            <AddButton goTo={props.goTo} />
         </SafeAreaView>
     )
 }

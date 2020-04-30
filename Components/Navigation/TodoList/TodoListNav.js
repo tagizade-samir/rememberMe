@@ -1,13 +1,14 @@
 import React from 'react'
 import TodoList from './TodoList'
+import { Constans } from '../../App/constans/constans'
 
 const TodoListNav = ({ navigation }) => {
     const goToAdd = () => {
-        navigation.navigate('Add')
+        navigation.navigate(Constans.ADD_SCREEN)
     }
 
     const goToUpdate = (id) => {
-        navigation.navigate('Update', { id: id })
+        navigation.navigate(Constans.UPDATE_SCREEN, { id: id })
     }
 
     return (

@@ -1,9 +1,10 @@
 import React from 'react'
 import Update from './Update'
+import {Constans} from '../../App/constans/constans'
 
 const UpdateNav = ({ navigation, route }) => {
     const goTo = () => {
-        navigation.navigate('ToDo')
+        navigation.navigate(Constans.TODO_SCREEN)
     }
 
     return (
