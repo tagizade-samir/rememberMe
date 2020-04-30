@@ -12,7 +12,6 @@ const AddItem = (props) => {
     const addMemo = () => {
         if (titleText && textText) {
             const date = new Date()
-            date.setHours(date.getHours() + 4)
             let box = props.checks.filter(elem => elem.checked)
             
             props.checkBox(1)

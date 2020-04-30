@@ -9,6 +9,9 @@ import Filter from './Filter/Filter'
 
 const TodoList = (props) => {
     const deleteTodo = (id) => {
+        if (props.data.length === 1) {
+            props.sortByDate(false)
+        }
         props.deleteTodo(id)
     }
 
@@ -37,6 +40,8 @@ const TodoList = (props) => {
                         id={item.id}
                         goToUpdate={props.goToUpdate} />
             )
+
+            // props.sorted ? Items.reverse() : Items
         } else {
             Items = props.data.filter(elem => elem.bgColor === props.filter).map(
                 item =>
@@ -49,6 +54,8 @@ const TodoList = (props) => {
                         deleteTodo={deleteTodo}
                         id={item.id} />
             )
+
+            // props.sorted ? Items.reverse() : Items
         }
     }
 
@@ -57,6 +64,7 @@ const TodoList = (props) => {
     }
 
     const purgeStore = () => {
+        props.sortByDate(false)
         props.purge()
     }
 

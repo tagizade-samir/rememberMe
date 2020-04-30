@@ -5,7 +5,8 @@ const windowH = Dimensions.get('window').height
 export const todoItem = StyleSheet.create({
     container: {
         padding: 10,
-        marginBottom: 20
+        marginBottom: 20,
+        flex: 1
     },
     titleContainer: {
         borderBottomColor: 'black',
@@ -14,13 +15,14 @@ export const todoItem = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingBottom: 5
+        paddingBottom: 5,
+        flex: 1,
     },
     title: {
         fontSize: 25,
         fontWeight: 'bold',
         letterSpacing: 1,
-        width: 200
+        flex: 1,
     },
     textContainer: {
         marginBottom: 10,
@@ -45,6 +47,8 @@ export const todoItem = StyleSheet.create({
     },
     btnContainer: {
         flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'flex-end'
     }
 })
 
